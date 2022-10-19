@@ -1,4 +1,4 @@
-import AddHabits from "./add-habits";
+import AddHabits from "../components/add-habits";
 import TimeLine from "./timeline";
 import Today from "./today";
 

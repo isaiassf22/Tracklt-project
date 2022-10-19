@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import GlobalStyle from "./style/globalStyle"
-import Login from "./login"
-import SignUp from "./sign-up"
+import Login from "./pages/login"
+import SignUp from "./pages/sign-up"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Habits from "./pages/habits"
+import Today from "./pages/today"
+import TimeLine from "./pages/timeline"
 
 
 export default function App() {
@@ -14,6 +17,9 @@ export default function App() {
             <Routes>
                 <Route path="/" element={ <Login />}/>
                 <Route path="/cadastro" element={ <SignUp />}/>
+                <Route path="/habitos" element={ <Habits />}/>
+                <Route path="/today" element={ <Today/>}/>
+                <Route path="/historico" element={ <TimeLine />}/>
             </Routes>
             </BaseStyle>
             </BrowserRouter>
