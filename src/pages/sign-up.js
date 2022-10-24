@@ -1,6 +1,6 @@
 import axios from "axios"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { BASE_URL } from "../constants/data"
 import tracklt from "../pics/Group8.png"
@@ -11,11 +11,15 @@ export default function SignUp() {
     const[password,setPassword]=useState("")
     const[name,SetName]=useState("")
     const[photo,setPhoto]=useState("")
+    const navigate =useNavigate()
+
+
 
     function createAcount(event){
         event.preventDefault()
         axios.post(`${BASE_URL}/sign-up`,{email:email, name:name, image:photo, password:password})
-            .then((res)=> console.log(res.data))
+            .then((res)=>{ console.log(res.data)
+            navigate("/")} )
             .catch((err)=>console.log(err.response.data))
             
     }

@@ -1,26 +1,36 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Habits from "./habits";
 import tracklt from "../pics/Group8.png"
 import axios from "axios";
-import { BASE_URL } from "../constants/data";
+import {  BASE_URL } from "../constants/data";
 import { useState } from "react";
 
 
 export default function Login() {
 
-    const[login,setLogin]=useState("")
-    const[password,setPassword]=useState("")
+    const [login, setLogin] = useState("")
+    const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+
+   // const {setToken} = React.useContext(AuthContext)
 
     function loginRequest(event) {
-       // axios.post(`${BASE_URL}/login`)
-       event.preventDefault()
+        // axios.post(`${BASE_URL}/login`)
+        event.preventDefault()
         console.log('oi login')
         console.log(login)
         console.log(password)
-        axios.post(`${BASE_URL}/login`,{email:login, password:password})
-            .then((resp)=> console.log(resp.data))
-            .catch((err)=>console.log(err.response.data))
+        axios.post(`${BASE_URL}/login`, { email: login, password: password })
+            .then(res => {
+                navigate('/habitos')
+                console.log(res.data)
+                console.log(res.data.token)
+                setToken(res.data.token)
+                //setProfileImg(`${res.data.image}`)
+            })
+
+            .catch((err) => console.log(err.response.data))
     }
 
 
@@ -30,15 +40,12 @@ export default function Login() {
             <LoginStyle>
                 <img src={tracklt} alt="trackit" />
                 <form onSubmit={loginRequest}>
-                    <input type="email" placeholder="email" value={login} onChange={(e)=> setLogin(e.target.value)} required />
-                    <input type="password" placeholder="senha" value={password} onChange={(e)=> setPassword(e.target.value)} required />
+                    <input type="email" placeholder="email" value={login} onChange={(e) => setLogin(e.target.value)} required />
+                    <input type="password" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit">Entrar</button>
                 </form>
                 <Link to="/cadastro"> <p>Não tem uma conta? Cadastre-se!</p> </Link>
             </LoginStyle>
-
-
-            <Habits />
 
         </>
 

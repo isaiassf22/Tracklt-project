@@ -12,7 +12,7 @@ export default function App() {
     return (
         <>
             <BrowserRouter>
-             <GlobalStyle />
+                 <GlobalStyle />
             <BaseStyle>
             <Routes>
                 <Route path="/" element={ <Login />}/>
@@ -22,6 +22,7 @@ export default function App() {
                 <Route path="/historico" element={ <TimeLine />}/>
             </Routes>
             </BaseStyle>
+            
             </BrowserRouter>
         </>
     )
