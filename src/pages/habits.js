@@ -1,17 +1,41 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import NewHabitSelection from "../components/habitSelection";
 import UpdatedHabits from "../components/updatedHabits";
-
+import { AuthContext } from "../constants/data";
+import axios from "axios";
 
 export default function Habits() {
 
-//const {token}=React.useContext(AuthContext)
-//console.log(token)
-    
+const {token,profileImg,habitList,setHabitList}=React.useContext(AuthContext)
+console.log(token)
+const [able,setAble]=useState(false)
+const[opened,setOpened]=useState(false)
+
+console.log(profileImg)
+
+useEffect(()=>{
+    const config = {
+    headers: {
+        "Authorization": `Bearer ${token}` 
+    }
+}    
+ 
+axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config)
+    .then((res)=>{
+        console.log(res.data)
+        setHabitList(res.data)
+        setAble(true)
+    })
+    .catch(err=>err.response.data)
+
+},[token,opened])
+
+
+
 
     return (
         <>
@@ -22,13 +46,15 @@ export default function Habits() {
                 <Footer/>
                 </div >
                 <div className="newhabit">
-                    <NewHabitSelection/>
+                    <NewHabitSelection opened={opened} setOpened={setOpened} />
                 </div>
-               <UpdatedHabits/>
-                <p className="noHabits">
+                {able ? habitList.map((l,index)=> <UpdatedHabits habit={l.name} id={l.id} key={index} />): undefined}
+
+                {able ?'' :  <p className="noHabits">
                 Você não tem nenhum hábito cadastrado ainda.
                  Adicione um hábito para começar a trackear!
-                </p>
+                </p>}
+               
             </StyledHabits>
          
             

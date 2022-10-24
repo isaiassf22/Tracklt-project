@@ -1,27 +1,43 @@
-import { useState } from "react"
+import axios from "axios"
+import React, { useState } from "react"
 import styled from "styled-components"
+import { AuthContext } from "../constants/data"
+//import { AuthContext } from "../constants/data"
 
-export default function UpdatedHabits() {
+export default function UpdatedHabits({ habit, id }) {
 
-    const buttons=["D","S","T","Q","Q","S","S"]
-    const [todelete,setToDelete]=useState('flex')
+    const buttons = ["D", "S", "T", "Q", "Q", "S", "S"]
+    const [todelete, setToDelete] = useState('flex')
+    const { token } = React.useContext(AuthContext)
 
-
-    function trash(){
-        alert('deseja remover?')
+    function trash() {
         setToDelete('none')
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
+            .then(res => {
+                console.log(res)
+                alert('deletado!')
+            })
+            .catch(err => {
+                console.log(err)
+                alert(err.response.data)
+            })
     }
 
     return (
         <>
             <UpdatedHabitsStyled display={todelete}>
-                <p>pegar as kids na escola</p>
-            <div>
-                {buttons.map( (l,index)=>   <button key={index} >{l}</button>)}
-            </div>
-            <ion-icon name="trash-outline" onClick={trash}></ion-icon>
+                <p>{habit}</p>
+                <div>
+                    {buttons.map((l, index) => <button key={index}  >{l}</button>)}
+                </div>
+                <ion-icon name="trash-outline" onClick={trash}></ion-icon>
             </UpdatedHabitsStyled>
-            
+
         </>
     )
 }
@@ -30,7 +46,7 @@ const UpdatedHabitsStyled = styled.div`
 margin-top: 20px;
 width:90%;
 height: 120px;
-display: ${props=>props.display};
+display: ${props => props.display};
 flex-direction: column;
 background-color: white;
 justify-content: center;

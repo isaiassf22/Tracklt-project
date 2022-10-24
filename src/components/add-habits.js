@@ -1,12 +1,12 @@
 import axios from "axios"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { AuthContext } from "../constants/data"
 
-
-export default function AddHabits({openedBox,opened}) {
+export default function AddHabits({openedBox}) {
     const [title, setTitle] = useState("")
     const [days, setDays] = useState([])
-    //const {token}=React.useContext(AuthContext)
+    const {token,setNewHabit}=React.useContext(AuthContext)
 
 
     function toSave(day) {
@@ -23,14 +23,16 @@ export default function AddHabits({openedBox,opened}) {
 
         const config = {
             headers: {
-                "Authorization": `Bearer {token}` 
+                "Authorization": `Bearer ${token}` 
             }
         }
-        openedBox(false)
+        
         console.log(answer)
         axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', answer,config)
             .then(res => {console.log(res.data)
-            console.log(opened)})
+                setNewHabit(res.data)
+                openedBox(false)
+            })
             .catch(err => err.response.data)
 
     }

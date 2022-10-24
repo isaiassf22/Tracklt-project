@@ -1,18 +1,20 @@
-import { useState } from "react"
+
 import styled from "styled-components"
 import AddHabits from "./add-habits"
 
 
-export default function NewHabitSelection() {
+export default function NewHabitSelection({opened,setOpened}) {
     
     
-
-    const[opened,setOpened]=useState(false)
     
     function button(){
+       if(opened){
+        setOpened(false)
+       }else{
         setOpened(true)
+       }
     }
-
+ 
     return (
         <>
             <MyStyledHabits>

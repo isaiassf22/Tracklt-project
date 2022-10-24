@@ -7,15 +7,17 @@ export const bac_color = 'E5E5E5'
 
 export const AuthContext = React.createContext({})
 
-export const AuthProvider = (props) => {
+export const AuthProvider = ({children}) => {
     const [token, setToken] = useState("token01")
     const [profileImg, setProfileImg] = useState("no-photos")
-    const caneta = "canetaaaa"
+    const [newHabit,setNewHabit]=useState({})
+    const [habitList,setHabitList]=useState([])
+    
 
 
     return (
-        <AuthContext.Provider value={{ token, setToken, profileImg, setProfileImg, caneta }}>
-            {props.childen}
+        <AuthContext.Provider value={{ token, setToken,profileImg, setProfileImg,newHabit,setNewHabit,habitList,setHabitList}}>
+            {children}
         </AuthContext.Provider>
     )
 }

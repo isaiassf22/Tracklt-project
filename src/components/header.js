@@ -1,17 +1,18 @@
 import styled from "styled-components"
 import track from "../pics/TrackIt.png"
-import pic from "../pics/Rectangle 14.png"
+//import pic from "../pics/Rectangle 14.png"
 import React from "react"
-
+import { AuthContext } from "../constants/data"
 
 export function Header(){
     
-    //const{profileImg,caneta}=React.useContext(AuthContext)    
+    const{profileImg}=React.useContext(AuthContext) 
+      
     return(
     <>
     <StyledHeader>
         <img className="logo" src={track} alt="" />
-        <img className="picture" src={pic} alt="" />
+        <img className="picture" src={profileImg} alt="img" />
     </StyledHeader>
     </>
     )

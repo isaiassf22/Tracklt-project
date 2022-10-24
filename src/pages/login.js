@@ -5,6 +5,7 @@ import tracklt from "../pics/Group8.png"
 import axios from "axios";
 import {  BASE_URL } from "../constants/data";
 import { useState } from "react";
+import { AuthContext } from "../constants/data";
 
 
 export default function Login() {
@@ -13,7 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
-   // const {setToken} = React.useContext(AuthContext)
+   const {setToken, setProfileImg} = React.useContext(AuthContext)
 
     function loginRequest(event) {
         // axios.post(`${BASE_URL}/login`)
@@ -27,7 +28,7 @@ export default function Login() {
                 console.log(res.data)
                 console.log(res.data.token)
                 setToken(res.data.token)
-                //setProfileImg(`${res.data.image}`)
+                setProfileImg(res.data.image)
             })
 
             .catch((err) => console.log(err.response.data))

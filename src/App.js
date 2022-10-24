@@ -6,11 +6,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Habits from "./pages/habits"
 import Today from "./pages/today"
 import TimeLine from "./pages/timeline"
+import { AuthProvider } from "./constants/data"
+
 
 
 export default function App() {
     return (
         <>
+        <AuthProvider>
             <BrowserRouter>
                  <GlobalStyle />
             <BaseStyle>
@@ -24,6 +27,8 @@ export default function App() {
             </BaseStyle>
             
             </BrowserRouter>
+        </AuthProvider>
+            
         </>
     )
 }
