@@ -12,7 +12,6 @@ export const AuthProvider = ({children}) => {
     const [profileImg, setProfileImg] = useState("no-photos")
     const [newHabit,setNewHabit]=useState({})
     const [habitList,setHabitList]=useState([])
-    
 
 
     return (

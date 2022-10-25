@@ -48,7 +48,7 @@ axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',co
                 <div className="newhabit">
                     <NewHabitSelection opened={opened} setOpened={setOpened} />
                 </div>
-                {able ? habitList.map((l,index)=> <UpdatedHabits habit={l.name} id={l.id} key={index} />): undefined}
+                {able ? habitList.map((l,index)=> <UpdatedHabits habit={l.name} id={l.id} days={l.days} key={index} />): undefined}
 
                 {able ?'' :  <p className="noHabits">
                 Você não tem nenhum hábito cadastrado ainda.

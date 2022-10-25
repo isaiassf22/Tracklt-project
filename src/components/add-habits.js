@@ -8,7 +8,6 @@ export default function AddHabits({openedBox}) {
     const [days, setDays] = useState([])
     const {token,setNewHabit}=React.useContext(AuthContext)
 
-
     function toSave(day) {
         setDays([...days, day])
     }
@@ -45,13 +44,13 @@ export default function AddHabits({openedBox}) {
                     <input type="text" placeholder="nome do hábito" value={title} onChange={(e) => setTitle(e.target.value)} required />
                     <br />
                     <div>
-                        <button type="button" className="day" onClick={() => toSave(1)}>D</button>
-                        <button type="button" className="day" onClick={() => toSave(2)}>S</button>
-                        <button type="button" className="day" onClick={() => toSave(3)}>T</button>
-                        <button type="button" className="day" onClick={() => toSave(4)}>Q</button>
-                        <button type="button" className="day" onClick={() => toSave(5)}>Q</button>
-                        <button type="button" className="day" onClick={() => toSave(6)}>S</button>
-                        <button type="button" className="day" onClick={() => toSave(7)}>S</button>
+                        {days.includes(1)? <button type="button" className="fillday" onClick={() => toSave(1)}>D</button>:<button type="button" className="day" onClick={() => toSave(1)}>D</button> }
+                        {days.includes(2)? <button type="button" className="fillday" onClick={() => toSave(2)}>S</button>:<button type="button" className="day" onClick={() => toSave(2)}>S</button> }
+                        {days.includes(3)? <button type="button" className="fillday" onClick={() => toSave(3)}>T</button>:<button type="button" className="day" onClick={() => toSave(3)}>T</button> }
+                        {days.includes(4)? <button type="button" className="fillday" onClick={() => toSave(4)}>Q</button>:<button type="button" className="day" onClick={() => toSave(4)}>Q</button> }
+                        {days.includes(5)? <button type="button" className="fillday" onClick={() => toSave(5)}>Q</button>:<button type="button" className="day" onClick={() => toSave(5)}>Q</button> }
+                        {days.includes(6)? <button type="button" className="fillday" onClick={() => toSave(6)}>S</button>:<button type="button" className="day" onClick={() => toSave(6)}>S</button> }
+                        {days.includes(7)? <button type="button" className="fillday" onClick={() => toSave(7)}>S</button>:<button type="button" className="day" onClick={() => toSave(7)}>S</button> }
                     </div>
                     <button type="button" className="first" onClick={toCancel}>cancelar</button>
                     <button type="button" className="second" onClick={toSend}>salvar</button>

@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { AuthContext } from "../constants/data"
 //import { AuthContext } from "../constants/data"
 
-export default function UpdatedHabits({ habit, id }) {
+export default function UpdatedHabits({ habit, id,days }) {
 
     const buttons = ["D", "S", "T", "Q", "Q", "S", "S"]
     const [todelete, setToDelete] = useState('flex')
@@ -33,7 +33,12 @@ export default function UpdatedHabits({ habit, id }) {
             <UpdatedHabitsStyled display={todelete}>
                 <p>{habit}</p>
                 <div>
-                    {buttons.map((l, index) => <button key={index}  >{l}</button>)}
+                { buttons.map((l, index) => {
+                    if (days.includes(index+1)){
+                        return <button className="fill" key={index} >{l}</button>
+                    } else{
+                        return <button key={index}  >{l}</button>
+                    }   } )}
                 </div>
                 <ion-icon name="trash-outline" onClick={trash}></ion-icon>
             </UpdatedHabitsStyled>
@@ -70,8 +75,9 @@ button{
     border: 1px solid gray;
     background-color: white;
 }
-button:target{
+.fill{
     background-color: gray;
+    color: white;
 }
 
 ion-icon{
