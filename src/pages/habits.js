@@ -10,61 +10,63 @@ import axios from "axios";
 
 export default function Habits() {
 
-const {token,profileImg,habitList,setHabitList}=React.useContext(AuthContext)
-console.log(token)
-const [able,setAble]=useState(false)
-const[opened,setOpened]=useState(false)
+    const { token, habitList, setHabitList } = React.useContext(AuthContext)
+    const [able, setAble] = useState(false)
+    const [opened, setOpened] = useState(false)
 
-console.log(profileImg)
 
-useEffect(()=>{
-    const config = {
-    headers: {
-        "Authorization": `Bearer ${token}` 
-    }
-}    
- 
-axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config)
-    .then((res)=>{
-        console.log(res.data)
-        setHabitList(res.data)
-        setAble(true)
-    })
-    .catch(err=>err.response.data)
 
-},[token,opened])
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
+        axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config)
+            .then((res) => {
+                console.log(res.data)
+                setHabitList(res.data)
+                if (res.data.length > 0) {
+                    setAble(true)
+                }
+
+            })
+            .catch(err => err.response.data)
+
+    }, [token, opened])
 
 
 
 
     return (
         <>
-            <StyledHabits>
+            <StyledDefault>
                 <Header />
-               
-               <div className="footer">
-                <Footer/>
+
+                <div className="footer">
+                    <Footer />
                 </div >
                 <div className="newhabit">
                     <NewHabitSelection opened={opened} setOpened={setOpened} />
                 </div>
-                {able ? habitList.map((l,index)=> <UpdatedHabits habit={l.name} id={l.id} days={l.days} key={index} />): undefined}
+                {able ? habitList.map((l, index) => <UpdatedHabits habit={l.name} id={l.id} days={l.days} key={index} />) : undefined}
 
-                {able ?'' :  <p className="noHabits">
-                Você não tem nenhum hábito cadastrado ainda.
-                 Adicione um hábito para começar a trackear!
+                {able ? '' : <p className="noHabits">
+                    Você não tem nenhum hábito cadastrado ainda.
+                    Adicione um hábito para começar a trackear!
                 </p>}
-               
-            </StyledHabits>
-         
-            
+
+            </StyledDefault>
+
+
 
         </>
 
     )
 }
 
-const StyledHabits = styled.div`
+export const StyledDefault = styled.div`
 background-color: aliceblue;
 width: 100%;
 height: 100%;
@@ -81,6 +83,18 @@ position: relative;
 .noHabits{
     font-size: 24px;
     margin: 15px;
+}
+h1{
+    color:#126BA5;
+    font-weight: 400;
+    font-size: 35px;
+    margin-top: 70px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+p{
+    font-size: 25px;
+    margin-left: 30px;
 }
 
 `

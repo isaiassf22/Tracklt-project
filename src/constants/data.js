@@ -12,10 +12,10 @@ export const AuthProvider = ({children}) => {
     const [profileImg, setProfileImg] = useState("no-photos")
     const [newHabit,setNewHabit]=useState({})
     const [habitList,setHabitList]=useState([])
-
+    const [click,setClick]=useState([])
 
     return (
-        <AuthContext.Provider value={{ token, setToken,profileImg, setProfileImg,newHabit,setNewHabit,habitList,setHabitList}}>
+        <AuthContext.Provider value={{ token, setToken,profileImg, setProfileImg,newHabit,setNewHabit,habitList,setHabitList,click,setClick}}>
             {children}
         </AuthContext.Provider>
     )

@@ -34,7 +34,7 @@ export default function UpdatedHabits({ habit, id,days }) {
                 <p>{habit}</p>
                 <div>
                 { buttons.map((l, index) => {
-                    if (days.includes(index+1)){
+                    if (days.includes(index)){
                         return <button className="fill" key={index} >{l}</button>
                     } else{
                         return <button key={index}  >{l}</button>
