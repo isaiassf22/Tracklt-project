@@ -4,7 +4,7 @@ import { AuthContext } from "../constants/data"
 import axios from "axios"
 import { useContext } from "react"
 
-export default function WhiteBox({task, done, id, made}) {
+export default function WhiteBox({task, done, id, sq, hsq }) {
 
     const { token, setClick, click } = useContext(AuthContext)
     const [check, setCheck]=useState(done)
@@ -55,7 +55,8 @@ export default function WhiteBox({task, done, id, made}) {
                 <p>
                     {task}
                 </p>
-                <p>praticar natação</p>
+                <span> Sequência atual: <p>{sq} dias </p>  </span>
+                <span>dias Seu recorde: <p>{hsq} dias</p></span>
             </div>
             <ion-icon name="checkmark-outline" onClick={() => verify()}  ></ion-icon>
         </Box>
@@ -73,9 +74,7 @@ border-radius: 10px;
 display: flex;
 justify-content: space-between;
 align-items: center;
-p{ 
-    fill : red ;
-}
+
 
 ion-icon{
     margin-right: 30px;
@@ -87,4 +86,16 @@ ion-icon{
     
     border-radius: 20px;
 }
+div{
+    span{
+    display: flex;
+    margin-left: 30px;
+    p{
+        font-size: 16px;
+         color:  ${props => props.bg ? "green" : 'black'} ;
+    }
+   
+}
+}
+
 `

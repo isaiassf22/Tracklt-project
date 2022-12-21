@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import { StyledDefault } from "./habits"
 import { Header } from "../components/header"
 import { Footer } from "../components/footer"
@@ -18,7 +17,7 @@ export default function Today() {
     const [tasks, setTasks] = useState([])
     const [made, setMade] = useState([])
     const [percentage, setPercentage] = useState([])
-    const [daywk, setDaywk] = useState('')
+   
 
     useEffect(() => {
         const config = {
@@ -57,11 +56,11 @@ export default function Today() {
             <StyledDefault color="gray">
 
                 <Header />
-                <h1> {dayjs().get('date')} {daywk} cam Segunda, 17/05</h1>
+                <h1> {dayjs().get('day')}  Quarta, 21/12</h1>
                 {percentage === [] ? <p style={{ color: "gray" }}> Nenhum hábito construido ainda</p> : <p style={{ color: "green" }}>{((made.length / (tasks.length)) * 100).toFixed(2)}% dos hábitos concluidos </p>}
 
                 {tasks.map((task, index) => (
-                    <WhiteBox task={task.name} done={task.done} id={task.id} made={setMade} key={index} />
+                    <WhiteBox task={task.name} done={task.done} id={task.id} sq={task.currentSequence} hsq={task.highestSequence} key={index} />
 
                 ))}
                 <div className="footer">

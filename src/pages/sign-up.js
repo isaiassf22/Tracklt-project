@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { BASE_URL } from "../constants/data"
 import tracklt from "../pics/Group8.png"
+import { ThreeDots } from "react-loader-spinner"
 
 export default function SignUp() {
    
@@ -12,7 +13,7 @@ export default function SignUp() {
     const[name,SetName]=useState("")
     const[photo,setPhoto]=useState("")
     const navigate =useNavigate()
-
+    const[able,setAble]=useState(false)
 
 
     function createAcount(event){
@@ -34,7 +35,18 @@ export default function SignUp() {
                     <input type="password" placeholder="senha" value={password} onChange={(e)=> setPassword(e.target.value)} required/>
                     <input type="text" placeholder="nome" value={name} onChange={(e)=> SetName(e.target.value)} required/>
                     <input type="url" placeholder="foto" value={photo} onChange={(e)=> setPhoto(e.target.value)} required/>
-                    <button type="submit">cadastrar</button>
+                    {able ? <button type="submit"   >
+                     <ThreeDots
+                        height="80"
+                        width="80"
+                        radius="9"
+                        color='white'
+                        ariaLabel='three-dots-loading'
+                        wrapperStyle
+                        wrapperClass
+                    
+                    />
+                   </button> :<button type="submit" onClick={()=>setAble(true)}>Cadastrar</button>} 
                 </form>
 
                 
@@ -76,10 +88,13 @@ button{
     height: 45px;
     border-radius: 5px;
     font-size: 18px;
-    background-color: blue;
+    background-color: #52B6FF ;
     margin-bottom: 15px;
     color: white;
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 p{
     font-size: 16px;
